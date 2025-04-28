@@ -4,7 +4,7 @@ import psycopg2
 from config import DB_PARAMS
 
 # --------------------- PAGE CONFIG ------------------------
-st.set_page_config(page_title="Coffee Sales SQL Explorer", layout="wide")
+st.set_page_config(page_title="Maven Roasters Coffee Sales SQL Explorer", layout="wide")
 
  
 
