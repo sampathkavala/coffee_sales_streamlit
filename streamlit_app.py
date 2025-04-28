@@ -6,8 +6,6 @@ from config import DB_PARAMS
 # --------------------- PAGE CONFIG ------------------------
 st.set_page_config(page_title="Maven Roasters Coffee Sales SQL Explorer", layout="wide")
 
- 
-
 # --------------------- SIDEBAR: Default Queries ------------------------
 with st.sidebar:
     st.title("Default Queries")
@@ -21,7 +19,7 @@ with st.sidebar:
     ])
 
 # --------------------- PAGE HEADER ------------------------
-st.title("☕ Coffee Sales SQL Explorer")
+st.title("☕ Maven Roasters Coffee Sales SQL Explorer")
 st.write("---")
 
 # --------------------- USER ROLE LOGIN ------------------------
@@ -29,9 +27,9 @@ st.write("---")
 user_type = st.radio("Select User Type", ["Admin", "User"])
 password = st.text_input("Enter Password", type="password")
 
-# Hardcoded Passwords
-admin_password = "Maven_Coffee_Roasters"
-user_password = "Welovecoffee@143"
+# ✅ Secure: Fetch passwords from Streamlit Secrets
+admin_password = st.secrets["ADMIN_PASSWORD"]
+user_password = st.secrets["USER_PASSWORD"]
 
 role_authenticated = False
 
@@ -55,7 +53,7 @@ if role_authenticated:
     schema_text = """
     **Tables and Key Columns:**
 
-     **products**
+    **products**
       - `product_id` (PK)
       - `category_id` (FK)
       - `product_type`
@@ -66,17 +64,17 @@ if role_authenticated:
       - `category_id` (PK)
       - `category_name`
     
-     **stores**
+    **stores**
       - `store_id` (PK)
       - `store_location`
     
-     **orders**
+    **orders**
       - `order_id` (PK)
       - `order_date`
       - `order_time`
       - `store_id` (FK)
     
-     **order_items**
+    **order_items**
       - `order_id` (FK)
       - `product_id` (FK)
       - `quantity`
@@ -133,4 +131,3 @@ if role_authenticated:
 
 else:
     st.info("Please login to access database operations.")
-
