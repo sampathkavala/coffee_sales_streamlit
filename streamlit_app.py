@@ -100,12 +100,12 @@ if role_authenticated:
                 query_check = query.strip().lower()
 
                 if role_authenticated == "user" and not query_check.startswith("select"):
-                    st.error("❌ Permission Denied: End Users can only perform SELECT queries.")
+                    st.error(" Permission Denied: End Users can only perform SELECT queries.")
                 else:
                     with psycopg2.connect(**DB_PARAMS) as conn:
                         df = pd.read_sql_query(query, conn)
 
-                    st.success("✅ Query executed successfully!")
+                    st.success(" Query executed successfully!")
                     st.write("### Query Results")
                     st.dataframe(df)
 
@@ -120,16 +120,16 @@ if role_authenticated:
 
                             chart_data = df.groupby(x_axis)[y_axis].sum().sort_values(ascending=False)
 
-                            st.write("### 📊 Bar Chart for Results")
+                            st.write("###  Bar Chart for the Query Results")
                             st.bar_chart(chart_data)
 
                         except Exception as e:
-                            st.warning(f"⚠️ Could not generate bar chart: {e}")
+                            st.warning(f"Could not generate bar chart: {e}")
                     else:
                         st.info(" No suitable data available for dynamic bar chart.")
 
             except Exception as e:
-                st.error(f"❌ Query Error: {e}")
+                st.error(f"Query Error: {e}")
 
 else:
     st.info("Please login to access database operations.")
